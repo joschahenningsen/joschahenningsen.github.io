@@ -19,7 +19,7 @@ function readMessage(){
 }
 
 function messageReceived(message){
-    printlines(getResponse(message.substring(2)));
+    printlines(getResponse(message));
     readMessage();
 }
 

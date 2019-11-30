@@ -40,7 +40,7 @@ var Terminal = (function () {
 		}
 
 		inputField.onfocus = function () {
-			inputField.value = terminalObj._inputLine.textContent
+			inputField.value = terminalObj._inputLine.textContent.replace("~ ", "");
 			terminalObj._cursor.style.display = 'inline'
 		}
 
@@ -53,15 +53,16 @@ var Terminal = (function () {
 				e.preventDefault()
 			} else if (shouldDisplayInput && e.which !== 13) {
 				setTimeout(function () {
-					terminalObj._inputLine.textContent = inputField.value
+					terminalObj._inputLine.textContent = "~ "+inputField.value
 				}, 1)
 			}
 		}
+		
 		inputField.onkeyup = function (e) {
 			if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
 				terminalObj._input.style.display = 'none'
 				var inputValue = inputField.value
-				if (shouldDisplayInput) terminalObj.print(inputValue)
+				if (shouldDisplayInput) terminalObj.printUser(inputValue)
 				terminalObj.html.removeChild(inputField)
 				if (typeof(callback) === 'function') {
 					if (PROMPT_TYPE === PROMPT_CONFIRM) {
@@ -96,6 +97,12 @@ var Terminal = (function () {
 		this.print = function (message) {
 			var newLine = document.createElement('div')
 			newLine.textContent = message
+			this._output.appendChild(newLine)
+		}
+		
+		this.printUser = function (message) {
+			var newLine = document.createElement('div')
+			newLine.textContent = "~ "+message
 			this._output.appendChild(newLine)
 		}
 
