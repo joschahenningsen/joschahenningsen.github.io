@@ -46,7 +46,7 @@ function getResponse(input){
             myTerminal = null;
             return "";
         case "exit":
-            window.location.replace("https://www.youtube.com/watch?v=DLzxrzFCyOs");
+            window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             return "";
         default:
             return "✘ command not found: "+input;
