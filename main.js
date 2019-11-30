@@ -9,7 +9,7 @@ window.onload = function() {
 function setup(){
     myTerminal.print("Hi,");
     myTerminal.print("I'm glad you made it this far!");
-    myTerminal.print("Feel free to exolore");
+    myTerminal.print("Feel free to explore");
     myTerminal.print("(C) 🌈 Joscha Henningsen 2019");
     myTerminal.print("\u2063");
 }
