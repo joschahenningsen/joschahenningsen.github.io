@@ -1,9 +1,10 @@
-/*! terminal.js v2.0 | (c) 2014 Erik Österberg | https://github.com/eosterberg/terminaljs Modified by Joscha Henningsen (https://github.com/joschahenningsen)*/
-
 var Terminal = (function () {
 	// PROMPT_TYPE
 	var PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3
-
+    var inputPrompt = "guest@joschas.page  ~ "
+    var inputPromptShape = ""
+    var inputPromptHTML = "<span id='inputPrompt'>"+inputPrompt+"</span>"+"<span id='inputPromptShape'>"+inputPromptShape+"</span>"
+    
 	var fireCursorInterval = function (inputField, terminalObj) {
 		var cursor = terminalObj._cursor
 		setTimeout(function () {
@@ -28,7 +29,9 @@ var Terminal = (function () {
 		inputField.style.opacity = '0'
 		inputField.style.fontSize = '0.2em'
 
-		terminalObj._inputLine.textContent = '~ '
+		terminalObj._inputLine.textContent = ''
+        terminalObj._inputPrompt.textContent = inputPrompt
+		terminalObj._inputPromptShape.textContent = inputPromptShape
 		terminalObj._input.style.display = 'block'
 		terminalObj.html.appendChild(inputField)
 		fireCursorInterval(inputField, terminalObj)
@@ -40,7 +43,7 @@ var Terminal = (function () {
 		}
 
 		inputField.onfocus = function () {
-			inputField.value = terminalObj._inputLine.textContent.replace("~ ", "");
+			inputField.value = terminalObj._inputLine.textContent;
 			terminalObj._cursor.style.display = 'inline'
 		}
 
@@ -53,7 +56,9 @@ var Terminal = (function () {
 				e.preventDefault()
 			} else if (shouldDisplayInput && e.which !== 13) {
 				setTimeout(function () {
-					terminalObj._inputLine.textContent = "~ "+inputField.value
+                    terminalObj._inputPrompt.textContent = inputPrompt
+                    terminalObj._inputPromptShape.textContent = inputPromptShape
+					terminalObj._inputLine.textContent = inputField.value
 				}, 1)
 			}
 		}
@@ -88,6 +93,10 @@ var Terminal = (function () {
 
 		this._innerWindow = document.createElement('div')
 		this._output = document.createElement('p')
+        this._inputPrompt = document.createElement('span');
+        this._inputPrompt.id="inputPrompt";
+        this._inputPromptShape = document.createElement('span');
+        this._inputPromptShape.id="inputPromptShape";
 		this._inputLine = document.createElement('span') //the span element where the users input is put
 		this._cursor = document.createElement('span')
 		this._input = document.createElement('p') //the full element administering the user input, including cursor
@@ -102,7 +111,7 @@ var Terminal = (function () {
 		
 		this.printUser = function (message) {
 			var newLine = document.createElement('div')
-			newLine.textContent = "~ "+message
+			newLine.innerHTML = inputPromptHTML+message
 			this._output.appendChild(newLine)
 		}
 
@@ -153,6 +162,8 @@ var Terminal = (function () {
 			this._shouldBlinkCursor = (bool === 'TRUE' || bool === '1' || bool === 'YES')
 		}
 
+		this._input.appendChild(this._inputPrompt)
+		this._input.appendChild(this._inputPromptShape)
 		this._input.appendChild(this._inputLine)
 		this._input.appendChild(this._cursor)
 		this._innerWindow.appendChild(this._output)

@@ -26,3 +26,13 @@ body{
     font-family: "RobotoPL";
     src: url("RobotoMonoforPowerline.ttf");
 }
+
+#inputPrompt{
+    background-color:#fff;
+    color:#000;
+    padding-left:10px;
+}
+
+#inputPromptShape{
+    margin-right:5px;
+}
