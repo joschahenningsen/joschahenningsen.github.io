@@ -58,7 +58,7 @@ var Terminal = (function () {
 				setTimeout(function () {
                     terminalObj._inputPrompt.textContent = inputPrompt
                     terminalObj._inputPromptShape.textContent = inputPromptShape
-					terminalObj._inputLine.textContent = inputField.value
+					terminalObj._inputLine.textContent = inputField.value.toLowerCase()
 				}, 1)
 			}
 		}
