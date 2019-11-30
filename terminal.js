@@ -105,7 +105,7 @@ var Terminal = (function () {
 
 		this.print = function (message) {
 			var newLine = document.createElement('div')
-			newLine.textContent = message
+			newLine.innerHTML = message
 			this._output.appendChild(newLine)
 		}
 		

@@ -42,14 +42,20 @@ function getResponse(input){
             myTerminal.clear();
             return "";
         case "rm -rf /":
-            myTerminal.print("segmentation fault (core dumped)");
+            myTerminal.print("<span class='error'>segmentation fault (core dumped)</span>");
             myTerminal = null;
             return "";
         case "exit":
             window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             return "";
+        case "contact":
+            var mail = caesarShift("ij@kptdibt.qbhf", -1);
+            var ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
+            ret += "<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
+            ret += "or here! --> <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a>";
+            return ret
         default:
-            return "✘ command not found: "+input;
+            return "<span class='error'>✘</span> command not found: "+input;
     }
 }
 
@@ -67,3 +73,22 @@ async function printlines(lines){
 function Sleep(milliseconds) {
    return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
+
+//Don't want plaintext email adresses online
+var caesarShift = function(str, amount) {
+	if (amount < 0)
+		return caesarShift(str, amount + 26);
+	var output = '';
+	for (var i = 0; i < str.length; i ++) {
+		var c = str[i];
+		if (c.match(/[a-z]/i)) {
+			var code = str.charCodeAt(i);
+			if ((code >= 65) && (code <= 90))
+				c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
+			else if ((code >= 97) && (code <= 122))
+				c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
+		}
+		output += c;
+	}
+	return output;
+};
