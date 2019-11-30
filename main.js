@@ -1,4 +1,5 @@
 var myTerminal = new Terminal();
+var indent = "<span class='indent'></span>"
 
 window.onload = function() {
     document.getElementById("terminal").append(myTerminal.html);
@@ -27,12 +28,12 @@ function getResponse(input){
     switch(input){
         case "help":
             var res = "Available commands:\n";
-            res += "help\n";
-            res += "whoami\n";
-            res += "contact\n";
-            res += "projects\n";
-            res += "clear\n";
-            res += "exit\n";
+            res += indent+"help\n";
+            res += indent+"whoami\n";
+            res += indent+"contact\n";
+            res += indent+"projects\n";
+            res += indent+"clear\n";
+            res += indent+"exit\n";
             return res;
         case "whoami":
             var res = "Joscha Henningsen\n";
@@ -51,8 +52,8 @@ function getResponse(input){
         case "contact":
             var mail = caesarShift("ij@kptdibt.qbhf", -1);
             var ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
-            ret += "<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
-            ret += "or here! --> <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a>";
+            ret += indent+"<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
+            ret += indent+"or here! --> <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br><br>";
             return ret
         default:
             return "<span class='error'>✘</span> command not found: "+input;

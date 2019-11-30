@@ -40,3 +40,7 @@ body{
 .error{
     color:red;
 }
+
+.indent{
+    margin-right:1em;
+}
