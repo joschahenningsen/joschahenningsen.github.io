@@ -53,7 +53,8 @@ function getResponse(input){
             var mail = caesarShift("ij@kptdibt.qbhf", -1);
             var ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
             ret += indent+"<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
-            ret += indent+"or here! --> <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br><br>";
+            ret += indent+"or here! --> <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
+            ret += indent+"<a style='color:#fff;' href='https://t.me/joschahenningsen'>t.me/joschahenningsen</a> <-- maby even there<br><br>";
             return ret
         default:
             return "<span class='error'>✘</span> command not found: "+input;
@@ -75,7 +76,7 @@ function Sleep(milliseconds) {
    return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-//Don't want plaintext email adresses online
+//Don't want plaintext email addresses online
 var caesarShift = function(str, amount) {
 	if (amount < 0)
 		return caesarShift(str, amount + 26);
