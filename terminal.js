@@ -44,7 +44,7 @@ var Terminal = (function () {
 		}
 
 		inputField.onfocus = function () {
-			inputField.value = terminalObj._inputLine.textContent;
+			inputField.value = terminalObj._inputLine.textContent.toLowerCase();
 			terminalObj._cursor.style.display = 'inline'
 		}
 
@@ -66,7 +66,7 @@ var Terminal = (function () {
 		inputField.onkeyup = function (e) {
 			if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
 				terminalObj._input.style.display = 'none'
-				var inputValue = inputField.value
+				var inputValue = inputField.value.toLowerCase()
 				if (shouldDisplayInput) terminalObj.printUser(inputValue)
 				terminalObj.html.removeChild(inputField)
 				if (typeof(callback) === 'function') {
