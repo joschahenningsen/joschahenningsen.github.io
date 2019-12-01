@@ -1,5 +1,9 @@
 body{
-    background-color:#000;
+    background-color:#0f111a;
+}
+
+#terminal::-webkit-scrollbar {
+    display: none;
 }
 
 #terminal{
@@ -8,6 +12,8 @@ body{
     left:0px;
     width:100%;
     height:100%;
+    scrollbar-width: none;
+    overflow-y: scroll;
 }
 
 .Terminal{
@@ -51,4 +57,12 @@ body{
 
 .indent{
     margin-right:1em;
+}
+
+.highlight1{
+    color:#c58b6f;
+}
+
+.highlight2{
+    color:#8ed0f8;
 }
