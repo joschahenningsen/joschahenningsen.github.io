@@ -1,7 +1,7 @@
 var Terminal = (function () {
 	// PROMPT_TYPE
 	var PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3
-	var inputPrompt = "guest@joschas.page"
+	var inputPrompt = "<span class='error'>❤ </span> guest@joschas.page"
 	var workingDir = "~"
     var inputPromptShape = ""
 	var inputPromptHTML = "<span id='inputPromptUser'>"+inputPrompt+"</span>"+"<span id='inputPromptShapeUser'>"+inputPromptShape+"</span>"
