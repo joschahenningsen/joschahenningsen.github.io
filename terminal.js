@@ -1,5 +1,7 @@
 let Terminal = (function () {
     // PROMPT_TYPE
+    let history = [];
+    let historyPointer = 0;
     let PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
     let inputPrompt = "<span class='error' style='font-size:.7em;'>\u26a1 </span> guest@joschas.page";
     let workingDir = "~";
@@ -66,7 +68,13 @@ let Terminal = (function () {
         inputField.onkeyup = function (e) {
             if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
                 terminalObj._input.style.display = 'none';
-                var inputValue = inputField.value.toLowerCase();
+                let inputValue = inputField.value.toLowerCase();
+                if (history.length === 0){
+                    history[historyPointer++] = inputValue;
+                }else if (history[history.length-1]!==inputValue) {
+                    history[history.length] = inputValue;
+                    historyPointer = history.length;
+                }
                 if (shouldDisplayInput) terminalObj.printUser(inputValue);
                 terminalObj.html.removeChild(inputField);
                 if (typeof (callback) === 'function') {
@@ -74,8 +82,23 @@ let Terminal = (function () {
                         callback(inputValue.toUpperCase()[0] === 'Y')
                     } else callback(inputValue)
                 }
+            }else if(e.key==='ArrowUp'){
+                if (historyPointer>0) {
+                    inputField.value = history[--historyPointer];
+                    terminalObj._inputPrompt.innterHTML = inputPromptHTML;
+                    terminalObj._inputLine.textContent = inputField.value.toLowerCase()
+                }
+            }else if(e.key==='ArrowDown'){
+                let val = "";
+                if (historyPointer<history.length-1) {
+                    val = history[++historyPointer]
+                }
+                inputField.value = val;
+                terminalObj._inputPrompt.innterHTML = inputPromptHTML;
+                terminalObj._inputLine.textContent = inputField.value.toLowerCase()
             }
         };
+
         if (firstPrompt) {
             firstPrompt = false;
             setTimeout(function () {
