@@ -69,9 +69,9 @@ let Terminal = (function () {
             if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
                 terminalObj._input.style.display = 'none';
                 let inputValue = inputField.value.toLowerCase();
-                if (history.length === 0){
+                if (inputValue!=="" && history.length === 0){
                     history[historyPointer++] = inputValue;
-                }else if (history[history.length-1]!==inputValue) {
+                }else if (inputValue!=="" && history[history.length-1]!==inputValue) {
                     history[history.length] = inputValue;
                     historyPointer = history.length;
                 }
