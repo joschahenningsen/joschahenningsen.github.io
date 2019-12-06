@@ -81,6 +81,7 @@ function getResponse(input){
         case "help":
             let res = "Available commands:\n";
             res += indent+"help\n";
+            res += indent+"ls\n";
             res += indent+"whoami\n";
             res += indent+"contact\n";
             res += indent+"projects\n";
