@@ -54,6 +54,12 @@ let Terminal = (function () {
             inputField.focus()
         };
 
+
+        window.onclick = function(){
+            inputField.focus();
+        };
+
+
         inputField.onkeydown = function (e) {
             if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
                 e.preventDefault()

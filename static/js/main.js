@@ -109,7 +109,6 @@ function getResponse(input){
             ret += indent+"<a style='color:#fff;' href='https://t.me/joschahenningsen'>t.me/joschahenningsen</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
-            myTerminal.clear();
             const rainP5 = new p5(rainSketch);
             if(document.getElementById("defaultCanvas0")!==null){
                 document.getElementById("defaultCanvas0").style.visibility = "visible";
