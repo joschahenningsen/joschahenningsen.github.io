@@ -1,5 +1,11 @@
 body{
     background-color:#0f111a;
+    overflow: hidden;
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    width: 100%;
 }
 
 #terminal::-webkit-scrollbar {
@@ -7,9 +13,6 @@ body{
 }
 
 #terminal{
-    position:fixed;
-    top:0px;
-    left:0px;
     width:100%;
     height:100%;
     scrollbar-width: none;
@@ -65,4 +68,13 @@ body{
 
 .highlight2{
     color:#8ed0f8;
+}
+
+#defaultCanvas0{
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
