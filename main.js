@@ -77,9 +77,7 @@ let caesarShift = function(str, amount) {
 function getResponse(input){
     switch(input){
     	case "ls":
-	        return "snake.out";
-	    case "./snake":
-	        return "try again later";
+	        return "rain.out";
         case "help":
             let res = "Available commands:\n";
             res += indent+"help\n";
