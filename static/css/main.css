@@ -26,7 +26,7 @@ body{
 
 @font-face {
     font-family: "RobotoPL";
-    src: url("../static/RobotoMonoforPowerline.ttf");
+    src: url("https://joschahenningsen.github.io/static/RobotoMonoforPowerline.ttf");
 }
 
 #inputPromptUser{
