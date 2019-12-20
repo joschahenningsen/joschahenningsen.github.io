@@ -77,7 +77,7 @@ let caesarShift = function(str, amount) {
 function getResponse(input){
     switch(input){
     	case "ls":
-	        return "rain.out";
+	        return "rain.out\nskills.txt";
         case "help":
             let res = "Available commands:\n";
             res += indent+"help\n";
@@ -116,6 +116,8 @@ function getResponse(input){
             return "";
         case "projects":
             return "Want to take a look at the stuff i've been building? Cool!\n<a style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
+        case "cat skills.txt":
+            return "-Java (Very good)\n-PHP\n-javascript & node.js\n-Android on Java and Kotlin (Also a little bit of flutter)\n-c\n-python";
         default:
             return "<span class='error'>✘</span> command not found: "+input+" for help consult \"help\"";
     }
