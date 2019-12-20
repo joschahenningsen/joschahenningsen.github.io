@@ -114,8 +114,10 @@ function getResponse(input){
                 document.getElementById("defaultCanvas0").style.visibility = "visible";
             }
             return "";
+        case "projects":
+            return "Want to take a look at the stuff i've been building? Cool!\n<a style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
         default:
-            return "<span class='error'>✘</span> command not found: "+input;
+            return "<span class='error'>✘</span> command not found: "+input+" for help consult \"help\"";
     }
 }
 
