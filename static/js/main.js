@@ -50,7 +50,7 @@ function readMessage(){
 }
 
 function messageReceived(message){
-    printLines(getResponse(message));
+    printLines(getResponse(message, false));
     readMessage();
 }
 
@@ -86,7 +86,9 @@ function getResponse(input){
             res += indent+"contact\n";
             res += indent+"projects\n";
             res += indent+"clear\n";
-            res += indent+"exit\n";
+            res += indent+"exit\n\n";
+            res += indent+"And more ;)\n";
+            
             return res;
         case "whoami":
             //return "<pre>\n" + syntaxHighlight(whoamiStr) + "</pre>\n";
@@ -118,17 +120,23 @@ function getResponse(input){
             return "Want to take a look at the stuff i've been building? Cool!\n<a style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
         case "cat skills.txt":
             return "-Java (Very good)\n-PHP\n-javascript & node.js\n-Android on Java and Kotlin (Also a little bit of flutter)\n-c\n-python";
+        case "fortune":
+            printLines(httpGet("https://fortune.joschas.page"), true);
+            return "";
         default:
             return "<span class='error'>✘</span> command not found: "+input+" for help consult \"help\"";
     }
 }
 
-async function printLines(lines){
+async function printLines(lines, escapeSpaces){
     if(lines === ""){
         return;
     }
     let list = lines.split("\n");
     for(let i = 0; i < list.length; i++){
+        if(escapeSpaces){
+            list[i]= list[i].split(" ").join("&nbsp;");
+        }
         myTerminal.print(list[i]);
     }
 }
@@ -154,4 +162,11 @@ function syntaxHighlight(jsonStr) {
         }
         return '<span class="' + cls + '"> ' + match + '</span>';
     });
+}
+
+function httpGet(url){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
