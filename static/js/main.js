@@ -104,11 +104,12 @@ function getResponse(input){
             window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             return "";
         case "contact":
-            let mail = caesarShift("ij@kptdibt.qbhf", -1);
+            const mail = caesarShift("ij@kptdibt.qbhf", -1);
+            const tme = caesarShift("u.nf/kptdibifoojohtfo", -1);
             let ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
             ret += indent+"<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
             ret += indent+"or here! --&gt <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
-            ret += indent+"<a style='color:#fff;' href='https://t.me/joschahenningsen'>t.me/joschahenningsen</a> &lt-- maybe even there<br><br>";
+            ret += indent+"<a style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
             const rainP5 = new p5(rainSketch);
