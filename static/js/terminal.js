@@ -25,18 +25,22 @@ let Terminal = (function () {
     let promptInput = function (terminalObj, message, PROMPT_TYPE, callback) {
         let shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
         let inputField = document.createElement('input');
+        let inputLabel = document.createElement('label');
 
-        inputField.style.position = 'absolute';
-        inputField.style.zIndex = '-100';
-        inputField.style.outline = 'none';
-        inputField.style.border = 'none';
-        inputField.style.opacity = '0';
-        inputField.style.fontSize = '0.2em';
+        inputLabel.style.position = 'absolute';
+        inputLabel.style.zIndex = '-100';
+        inputLabel.style.outline = 'none';
+        inputLabel.style.border = 'none';
+        inputLabel.style.opacity = '0';
+        inputLabel.style.fontSize = '0.2em';
+
+        inputLabel.innerHTML="placeholder";
+        inputLabel.appendChild(inputField);
 
         terminalObj._inputLine.textContent = '';
         terminalObj._inputPrompt.innerHTML = inputPromptHTML;
         terminalObj._input.style.display = 'block';
-        terminalObj.html.appendChild(inputField);
+        terminalObj.html.appendChild(inputLabel);
         fireCursorInterval(inputField, terminalObj);
 
         if (message.length) terminalObj.print(PROMPT_TYPE === PROMPT_CONFIRM ? message + ' (y/n)' : message);
@@ -82,7 +86,7 @@ let Terminal = (function () {
                     historyPointer = history.length;
                 }
                 if (shouldDisplayInput) terminalObj.printUser(inputValue);
-                terminalObj.html.removeChild(inputField);
+                terminalObj.html.removeChild(inputLabel);
                 if (typeof (callback) === 'function') {
                     if (PROMPT_TYPE === PROMPT_CONFIRM) {
                         callback(inputValue.toUpperCase()[0] === 'Y')
