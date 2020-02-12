@@ -1,16 +1,14 @@
-let Terminal = (function () {
+const Terminal = (function () {
     // PROMPT_TYPE
-    let history = [];
-    let historyPointer = 0;
-    let PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
-    let inputPrompt = "<span class='error' style='font-size:.7em;'>\u26a1 </span> guest@joschas.page";
-    let workingDir = "~";
-    let inputPromptShape = "";
+    const PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
+    const inputPrompt = "<span class='error'>❤ </span> guest@joschas.page";
+    const workingDir = "~";
+    const inputPromptShape = "";
     let inputPromptHTML = "<span id='inputPromptUser'>" + inputPrompt + "</span>" + "<span id='inputPromptShapeUser'>" + inputPromptShape + "</span>";
     inputPromptHTML += "<span id='inputPromptLocation'>" + workingDir + "</span>" + "<span id='inputPromptShapeLocation'>" + inputPromptShape + "</span>";
 
-    let fireCursorInterval = function (inputField, terminalObj) {
-        let cursor = terminalObj._cursor;
+    const fireCursorInterval = function (inputField, terminalObj) {
+        const cursor = terminalObj._cursor;
         setTimeout(function () {
             if (inputField.parentElement && terminalObj._shouldBlinkCursor) {
                 cursor.style.visibility = cursor.style.visibility === 'visible' ? 'hidden' : 'visible';
@@ -22,25 +20,21 @@ let Terminal = (function () {
     };
 
     let firstPrompt = true;
-    let promptInput = function (terminalObj, message, PROMPT_TYPE, callback) {
-        let shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
-        let inputField = document.createElement('input');
-        let inputLabel = document.createElement('label');
+    promptInput = function (terminalObj, message, PROMPT_TYPE, callback) {
+        const shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
+        const inputField = document.createElement('input');
 
-        inputLabel.style.position = 'absolute';
-        inputLabel.style.zIndex = '-100';
-        inputLabel.style.outline = 'none';
-        inputLabel.style.border = 'none';
-        inputLabel.style.opacity = '0';
-        inputLabel.style.fontSize = '0.2em';
-
-        inputLabel.innerHTML="placeholder";
-        inputLabel.appendChild(inputField);
+        inputField.style.position = 'absolute';
+        inputField.style.zIndex = '-100';
+        inputField.style.outline = 'none';
+        inputField.style.border = 'none';
+        inputField.style.opacity = '0';
+        inputField.style.fontSize = '0.2em';
 
         terminalObj._inputLine.textContent = '';
         terminalObj._inputPrompt.innerHTML = inputPromptHTML;
         terminalObj._input.style.display = 'block';
-        terminalObj.html.appendChild(inputLabel);
+        terminalObj.html.appendChild(inputField);
         fireCursorInterval(inputField, terminalObj);
 
         if (message.length) terminalObj.print(PROMPT_TYPE === PROMPT_CONFIRM ? message + ' (y/n)' : message);
@@ -58,12 +52,6 @@ let Terminal = (function () {
             inputField.focus()
         };
 
-
-        window.onclick = function(){
-            inputField.focus();
-        };
-
-
         inputField.onkeydown = function (e) {
             if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
                 e.preventDefault()
@@ -78,37 +66,16 @@ let Terminal = (function () {
         inputField.onkeyup = function (e) {
             if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
                 terminalObj._input.style.display = 'none';
-                let inputValue = inputField.value.toLowerCase();
-                if (inputValue!=="" && history.length === 0){
-                    history[historyPointer++] = inputValue;
-                }else if (inputValue!=="" && history[history.length-1]!==inputValue) {
-                    history[history.length] = inputValue;
-                    historyPointer = history.length;
-                }
+                const inputValue = inputField.value.toLowerCase();
                 if (shouldDisplayInput) terminalObj.printUser(inputValue);
-                terminalObj.html.removeChild(inputLabel);
+                terminalObj.html.removeChild(inputField);
                 if (typeof (callback) === 'function') {
                     if (PROMPT_TYPE === PROMPT_CONFIRM) {
                         callback(inputValue.toUpperCase()[0] === 'Y')
                     } else callback(inputValue)
                 }
-            }else if(e.key==='ArrowUp'){
-                if (historyPointer>0) {
-                    inputField.value = history[--historyPointer];
-                    terminalObj._inputPrompt.innterHTML = inputPromptHTML;
-                    terminalObj._inputLine.textContent = inputField.value.toLowerCase()
-                }
-            }else if(e.key==='ArrowDown'){
-                let val = "";
-                if (historyPointer<history.length-1) {
-                    val = history[++historyPointer]
-                }
-                inputField.value = val;
-                terminalObj._inputPrompt.innterHTML = inputPromptHTML;
-                terminalObj._inputLine.textContent = inputField.value.toLowerCase()
             }
         };
-
         if (firstPrompt) {
             firstPrompt = false;
             setTimeout(function () {
@@ -119,7 +86,9 @@ let Terminal = (function () {
         }
     };
 
-    let TerminalConstructor = function (id) {
+    let terminalBeep;
+
+    const TerminalConstructor = function (id) {
         this.html = document.createElement('div');
         this.html.className = 'Terminal';
         if (typeof (id) === 'string') {
@@ -137,13 +106,13 @@ let Terminal = (function () {
         this._shouldBlinkCursor = true;
 
         this.print = function (message) {
-            var newLine = document.createElement('div');
+            const newLine = document.createElement('div');
             newLine.innerHTML = message;
             this._output.appendChild(newLine)
         };
 
         this.printUser = function (message) {
-            var newLine = document.createElement('div');
+            const newLine = document.createElement('div');
             newLine.innerHTML = inputPromptHTML + message;
             this._output.appendChild(newLine)
         };
