@@ -20,6 +20,8 @@ body::-webkit-scrollbar {
     height:100%;
     scrollbar-width: none;
     overflow-y: scroll;
+    position: absolute;
+    top: 0px;
 }
 
 .Terminal{
