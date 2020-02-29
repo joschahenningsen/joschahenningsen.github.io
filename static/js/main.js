@@ -104,7 +104,7 @@ function getResponse(input){
             window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             return "";
         case "contact":
-            const mail = caesarShift("ij@kptdibt.qbhf", -1);
+            const mail = caesarShift("kptdib.ifoojohtfo@dt.uvn.fev", -1);
             const tme = caesarShift("u.nf/kptdibifoojohtfo", -1);
             let ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
             ret += indent+"<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
