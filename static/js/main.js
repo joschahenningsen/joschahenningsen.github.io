@@ -107,9 +107,9 @@ function getResponse(input){
             const mail = caesarShift("kptdib.ifoojohtfo@dt.uvn.fev", -1);
             const tme = caesarShift("u.nf/kptdibifoojohtfo", -1);
             let ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
-            ret += indent+"<a style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
-            ret += indent+"or here! --&gt <a style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
-            ret += indent+"<a style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
+            ret += indent+"<a target='_blank' style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
+            ret += indent+"or here! --&gt <a target='_blank' style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
+            ret += indent+"<a target='_blank' style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
             const rainP5 = new p5(rainSketch);
@@ -118,7 +118,7 @@ function getResponse(input){
             }
             return "";
         case "projects":
-            return "Want to take a look at the stuff i've been building? Cool!\n<a style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
+            return "Want to take a look at the stuff i've been building? Cool!\n<a target='_blank' style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
         case "cat skills.txt":
             return "-Java (Very good)\n-PHP\n-javascript & node.js\n-Android on Java and Kotlin (Also a little bit of flutter)\n-c\n-python";
         case "fortune":
