@@ -40,7 +40,7 @@ window.onload = function() {
     myTerminal.print("Hi,");
     myTerminal.print("I'm glad you made it this far!");
     myTerminal.print("Feel free to explore");
-    myTerminal.print("(C) Joscha Henningsen " + getYear() + " 🌈");
+    myTerminal.print("(C) Joscha Henningsen " + new Date().getFullYear() + " 🌈");
     myTerminal.print("\u2063");
     readMessage();
 };
