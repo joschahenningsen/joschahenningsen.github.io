@@ -31,7 +31,7 @@ body::-webkit-scrollbar {
 
 @font-face {
     font-family: "RobotoPL";
-    src: url("https://joschahenningsen.github.io/static/font/RobotoMonoforPowerline.ttf");
+    src: url("static/font/RobotoMonoforPowerline.ttf");
 }
 
 #inputPromptUser{
