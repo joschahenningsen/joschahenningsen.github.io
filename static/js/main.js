@@ -42,8 +42,20 @@ window.onload = function() {
     myTerminal.print("Feel free to explore");
     myTerminal.print("(C) Joscha Henningsen " + new Date().getFullYear() + " 🌈");
     myTerminal.print("\u2063");
+    if(navigator.userAgent.includes("Googlebot")){
+        printAll();
+    }
     readMessage();
 };
+
+function printAll(){
+    printLines(getResponse("whoami",false));
+    printLines(getResponse("ls",false));
+    printLines(getResponse("help",false));
+    printLines(getResponse("contact",false));
+    printLines(getResponse("projects",false));
+    printLines(getResponse("fortune",false));
+}
 
 function readMessage(){
     myTerminal.input("", function (userInput) {messageReceived(userInput)});
