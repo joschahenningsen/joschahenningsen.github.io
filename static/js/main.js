@@ -124,11 +124,16 @@ function getResponse(input){
             ret += indent+"<a target='_blank' style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
-            const rainP5 = new p5(rainSketch);
-            if(document.getElementById("defaultCanvas0")!==null){
-                document.getElementById("defaultCanvas0").style.visibility = "visible";
-            }
-            return "";
+            var script = document.createElement('script');
+            script.onload = function () {
+                const rainP5 = new p5(rainSketch);
+                if(document.getElementById("defaultCanvas0")!==null){
+                    document.getElementById("defaultCanvas0").style.visibility = "visible";
+                }
+            };
+            script.src = "https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js";
+            document.head.appendChild(script);
+            return "loading...";
         case "projects":
             return "Want to take a look at the stuff i've been building? Cool!\n<a target='_blank' style='color:#fff;' href='https://github.com/joschahenningsen'>This</a> is my GitHub. Unfortunately there is not to much on yet but stay tuned anyways!";
         case "cat skills.txt":

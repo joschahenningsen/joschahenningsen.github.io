@@ -1,5 +1,6 @@
 const Terminal = (function () {
     // PROMPT_TYPE
+    var isBlinking = false;
     const PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
     const inputPrompt = "<span class='error'>❤ </span> guest@joschas.page";
     const workingDir = "~";
@@ -10,32 +11,37 @@ const Terminal = (function () {
     const fireCursorInterval = function (inputField, terminalObj) {
         const cursor = terminalObj._cursor;
         setTimeout(function () {
-            if (inputField.parentElement && terminalObj._shouldBlinkCursor) {
-                cursor.style.visibility = cursor.style.visibility === 'visible' ? 'hidden' : 'visible';
-                fireCursorInterval(inputField, terminalObj)
-            } else {
-                cursor.style.visibility = 'visible'
-            }
+            cursor.style.visibility = cursor.style.visibility === 'visible' ? 'hidden' : 'visible';
+            fireCursorInterval(inputField, terminalObj)
         }, 500)
     };
 
     let firstPrompt = true;
     promptInput = function (terminalObj, message, PROMPT_TYPE, callback) {
         const shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
-        const inputField = document.createElement('input');
+        const inputLabel = document.createElement('label');
+        inputLabel.setAttribute('for', 'inputBox');
+        inputLabel.style.opacity = '0';
 
+        const inputField = document.createElement('input');
+        inputField.setAttribute('id', 'inputBox')
         inputField.style.position = 'absolute';
         inputField.style.zIndex = '-100';
         inputField.style.outline = 'none';
         inputField.style.border = 'none';
         inputField.style.opacity = '0';
         inputField.style.fontSize = '0.2em';
+        inputLabel.appendChild(inputField)
+        inputLabel.appendChild(document.createTextNode("Intentinally invisible"))
 
         terminalObj._inputLine.textContent = '';
         terminalObj._inputPrompt.innerHTML = inputPromptHTML;
         terminalObj._input.style.display = 'block';
-        terminalObj.html.appendChild(inputField);
-        fireCursorInterval(inputField, terminalObj);
+        terminalObj.html.appendChild(inputLabel);
+        if(!isBlinking){
+            isBlinking = true;
+            fireCursorInterval(inputField, terminalObj);
+        }
 
         if (message.length) terminalObj.print(PROMPT_TYPE === PROMPT_CONFIRM ? message + ' (y/n)' : message);
 
@@ -68,7 +74,7 @@ const Terminal = (function () {
                 terminalObj._input.style.display = 'none';
                 const inputValue = inputField.value.toLowerCase();
                 if (shouldDisplayInput) terminalObj.printUser(inputValue);
-                terminalObj.html.removeChild(inputField);
+                terminalObj.html.removeChild(inputLabel);
                 if (typeof (callback) === 'function') {
                     if (PROMPT_TYPE === PROMPT_CONFIRM) {
                         callback(inputValue.toUpperCase()[0] === 'Y')
@@ -86,8 +92,6 @@ const Terminal = (function () {
         }
     };
 
-    let terminalBeep;
-
     const TerminalConstructor = function (id) {
         this.html = document.createElement('div');
         this.html.className = 'Terminal';
@@ -99,9 +103,9 @@ const Terminal = (function () {
         this._output = document.createElement('p');
         this._inputPrompt = document.createElement('span');
         this._inputPrompt.innterHTML = inputPromptHTML;
-        this._inputLine = document.createElement('span'); //the span element where the users input is put
+        this._inputLine = document.createElement('span');
         this._cursor = document.createElement('span');
-        this._input = document.createElement('p'); //the full element administering the user input, including cursor
+        this._input = document.createElement('p');
 
         this._shouldBlinkCursor = true;
 
@@ -184,7 +188,6 @@ const Terminal = (function () {
         this._output.style.margin = '0';
         this._cursor.style.background = 'white';
         this._cursor.innerHTML = 'C'; //put something in the cursor..
-        this._cursor.style.display = 'none'; //then hide it
         this._input.style.display = 'none'
     };
 

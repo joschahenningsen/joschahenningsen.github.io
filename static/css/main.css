@@ -27,6 +27,7 @@ body::-webkit-scrollbar {
 .Terminal{
     font-family: "RobotoPL", sans-serif !important;
     background-color: #0f111a !important;
+    font-display: swap;
 }
 
 @font-face {
