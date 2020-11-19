@@ -32,7 +32,7 @@ const Terminal = (function () {
         inputField.style.opacity = '0';
         inputField.style.fontSize = '0.2em';
         inputLabel.appendChild(inputField)
-        inputLabel.appendChild(document.createTextNode("Intentinally invisible"))
+        inputLabel.appendChild(document.createTextNode("Intentionally invisible"))
 
         terminalObj._inputLine.textContent = '';
         terminalObj._inputPrompt.innerHTML = inputPromptHTML;
