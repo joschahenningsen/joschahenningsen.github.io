@@ -31,6 +31,7 @@ const Terminal = (function () {
         inputField.style.border = 'none';
         inputField.style.opacity = '0';
         inputField.style.fontSize = '0.2em';
+        inputField.setAttribute("autocomplete", "off");
         inputLabel.appendChild(inputField)
         inputLabel.appendChild(document.createTextNode("Intentionally invisible"))
 
