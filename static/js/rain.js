@@ -41,14 +41,14 @@ let rainSketch = function(p){
 
     p.keyPressed = function() {
         if (p.keyCode === 81) {
-            var elem = document.getElementById("defaultCanvas0");
+            const elem = document.getElementById("defaultCanvas0");
             if(elem!==null)
                 elem.parentNode.removeChild(elem);
         }
     }
 
     p.mouseClicked = function() {
-        var elem = document.getElementById("defaultCanvas0");
+        const elem = document.getElementById("defaultCanvas0");
         if(elem!==null)
             elem.parentNode.removeChild(elem);
     }

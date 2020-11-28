@@ -124,7 +124,7 @@ function getResponse(input){
             ret += indent+"<a target='_blank' style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
-            var script = document.createElement('script');
+            const script = document.createElement('script');
             script.onload = function () {
                 const rainP5 = new p5(rainSketch);
                 if(document.getElementById("defaultCanvas0")!==null){
@@ -183,7 +183,7 @@ function syntaxHighlight(jsonStr) {
 }
 
 function httpGet(url){
-    var xmlHttp = new XMLHttpRequest();
+    const xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
