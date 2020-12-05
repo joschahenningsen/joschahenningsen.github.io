@@ -188,7 +188,7 @@ const Terminal = (function () {
         this._input.style.margin = '0';
         this._output.style.margin = '0';
         this._cursor.style.background = 'white';
-        this._cursor.innerHTML = 'C'; //put something in the cursor..
+        this._cursor.innerHTML = '_'; //put something in the cursor..
         this._input.style.display = 'none';
     }
 }());
