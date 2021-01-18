@@ -1,6 +1,7 @@
 let myTerminal = new Terminal();
 const indent = "<span class='indent'></span>";
-const whoamiObj= {"name": "Joscha Henningsen",
+const whoamiObj = {
+    "name": "Joscha Henningsen",
     "birthday": "23.09.1998",
     "placeOfBirth": "Hamburg, Germany",
     "location": "Munich, Germany",
@@ -26,7 +27,7 @@ const whoamiObj= {"name": "Joscha Henningsen",
     },
     "work": {
         "TUM": {
-            "type" : "teaching",
+            "type": "teaching",
             "title": "Tutor: Praktikum Grundlagen der Programmierung",
             "location": "Munich",
             "period": "Winter Semester 2019/20"
@@ -35,72 +36,74 @@ const whoamiObj= {"name": "Joscha Henningsen",
 };
 const whoamiStr = JSON.stringify(whoamiObj, undefined, 2);
 
-window.onload = function() {
+window.onload = function () {
     document.getElementById("terminal").append(myTerminal.html);
     myTerminal.print("Hi,");
     myTerminal.print("I'm glad you made it this far!");
     myTerminal.print("Feel free to explore");
     myTerminal.print("(C) Joscha Henningsen " + new Date().getFullYear() + " 🌈");
     myTerminal.print("\u2063");
-    if(navigator.userAgent.includes("Googlebot")){
+    if (navigator.userAgent.includes("Googlebot")) {
         printAll();
     }
     readMessage();
 };
 
-function printAll(){
-    printLines(getResponse("whoami",false));
-    printLines(getResponse("ls",false));
-    printLines(getResponse("help",false));
-    printLines(getResponse("contact",false));
-    printLines(getResponse("projects",false));
-    printLines(getResponse("fortune",false));
+function printAll() {
+    printLines(getResponse("whoami", false));
+    printLines(getResponse("ls", false));
+    printLines(getResponse("help", false));
+    printLines(getResponse("contact", false));
+    printLines(getResponse("projects", false));
+    printLines(getResponse("fortune", false));
 }
 
-function readMessage(){
-    myTerminal.input("", function (userInput) {messageReceived(userInput)});
+function readMessage() {
+    myTerminal.input("", function (userInput) {
+        messageReceived(userInput)
+    });
 }
 
-function messageReceived(message){
+function messageReceived(message) {
     printLines(getResponse(message, false));
     readMessage();
 }
 
 
 //Don't want plaintext email addresses online
-let caesarShift = function(str, amount) {
-	if (amount < 0)
-		return caesarShift(str, amount + 26);
+let caesarShift = function (str, amount) {
+    if (amount < 0)
+        return caesarShift(str, amount + 26);
     let output = '';
-    for (let i = 0; i < str.length; i ++) {
+    for (let i = 0; i < str.length; i++) {
         let c = str[i];
         if (c.match(/[a-z]/i)) {
             let code = str.charCodeAt(i);
             if ((code >= 65) && (code <= 90))
-				c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
-			else if ((code >= 97) && (code <= 122))
-				c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
-		}
-		output += c;
-	}
-	return output;
+                c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
+            else if ((code >= 97) && (code <= 122))
+                c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
+        }
+        output += c;
+    }
+    return output;
 };
 
-function getResponse(input){
-    switch(input){
-    	case "ls":
-	        return "rain.out\nskills.md";
+function getResponse(input) {
+    switch (input) {
+        case "ls":
+            return "rain.out\nskills.md";
         case "help":
             let res = "Available commands:\n";
-            res += indent+"help\n";
-            res += indent+"ls\n";
-            res += indent+"whoami\n";
-            res += indent+"contact\n";
-            res += indent+"projects\n";
-            res += indent+"clear\n";
-            res += indent+"exit\n\n";
-            res += indent+"And more ;)\n";
-            
+            res += indent + "help\n";
+            res += indent + "ls\n";
+            res += indent + "whoami\n";
+            res += indent + "contact\n";
+            res += indent + "projects\n";
+            res += indent + "clear\n";
+            res += indent + "exit\n\n";
+            res += indent + "And more ;)\n";
+
             return res;
         case "whoami":
             //return "<pre>\n" + syntaxHighlight(whoamiStr) + "</pre>\n";
@@ -119,15 +122,15 @@ function getResponse(input){
             const mail = caesarShift("kptdib.ifoojohtfo@dt.uvn.fev", -1);
             const tme = caesarShift("u.nf/kptdibifoojohtfo", -1);
             let ret = "Uhh, you want to get in touch? Awesome, I'm always up for a chat:<br><br>";
-            ret += indent+"<a target='_blank' style='color:#fff;' href='mailto:"+mail+"'>"+mail+"</a> &lt-- click here<br>";
-            ret += indent+"or here! --&gt <a target='_blank' style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
-            ret += indent+"<a target='_blank' style='color:#fff;' href='https://"+tme+"'>"+tme+"</a> &lt-- maybe even there<br><br>";
+            ret += indent + "<a target='_blank' style='color:#fff;' href='mailto:" + mail + "'>" + mail + "</a> &lt-- click here<br>";
+            ret += indent + "or here! --&gt <a target='_blank' style='color:#fff;' href='https://twitter.com/joschahen'>twitter.com/joschahen</a><br>";
+            ret += indent + "<a target='_blank' style='color:#fff;' href='https://" + tme + "'>" + tme + "</a> &lt-- maybe even there<br><br>";
             return ret;
         case "./rain.out":
             const script = document.createElement('script');
             script.onload = function () {
                 const rainP5 = new p5(rainSketch);
-                if(document.getElementById("defaultCanvas0")!==null){
+                if (document.getElementById("defaultCanvas0") !== null) {
                     document.getElementById("defaultCanvas0").style.visibility = "visible";
                 }
             };
@@ -142,25 +145,25 @@ function getResponse(input){
             printLines(httpGet("https://fortune.joschas.page"), true);
             return "";
         default:
-            return "<span class='error'>✘</span> command not found: "+input+" for help consult \"help\"";
+            return "<span class='error'>✘</span> command not found: " + input.split(" ")[0] + " for help consult \"help\"";
     }
 }
 
-async function printLines(lines, escapeSpaces){
-    if(lines === ""){
+async function printLines(lines, escapeSpaces) {
+    if (lines === "") {
         return;
     }
     let list = lines.split("\n");
-    for(let i = 0; i < list.length; i++){
-        if(escapeSpaces){
-            list[i]= list[i].split(" ").join("&nbsp;");
+    for (let i = 0; i < list.length; i++) {
+        if (escapeSpaces) {
+            list[i] = list[i].split(" ").join("&nbsp;");
         }
         myTerminal.print(list[i]);
     }
 }
 
 function Sleep(milliseconds) {
-   return new Promise(resolve => setTimeout(resolve, milliseconds));
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 function syntaxHighlight(jsonStr) {
@@ -182,9 +185,9 @@ function syntaxHighlight(jsonStr) {
     });
 }
 
-function httpGet(url){
+function httpGet(url) {
     const xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false ); // false for synchronous request
-    xmlHttp.send( null );
+    xmlHttp.open("GET", url, false); // false for synchronous request
+    xmlHttp.send(null);
     return xmlHttp.responseText;
 }

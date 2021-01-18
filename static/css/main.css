@@ -1,5 +1,5 @@
-body{
-    background-color:#0f111a;
+body {
+    background-color: #0f111a;
     overflow-x: hidden;
     height: 100%;
     top: 0px;
@@ -15,16 +15,16 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-#terminal{
-    width:100%;
-    height:100%;
+#terminal {
+    width: 100%;
+    height: 100%;
     scrollbar-width: none;
     overflow-y: scroll;
     position: absolute;
     top: 0px;
 }
 
-.Terminal{
+.Terminal {
     font-family: "RobotoPL", sans-serif !important;
     background-color: #0f111a !important;
     font-display: swap;
@@ -35,48 +35,48 @@ body::-webkit-scrollbar {
     src: url("../font/RobotoMonoforPowerline.ttf");
 }
 
-#inputPromptUser{
-    background-color:#003642;
-    color:#c5a119;
-    padding-left:10px;
-    padding-right:5px;
-}
-
-#inputPromptShapeUser{
-    color:#003642;
-    background-color:#0087d5;
+#inputPromptUser {
+    background-color: #003642;
+    color: #c5a119;
+    padding-left: 10px;
     padding-right: 5px;
 }
 
-#inputPromptLocation{
-    background-color:#0087d5;
-    color:#000;
+#inputPromptShapeUser {
+    color: #003642;
+    background-color: #0087d5;
     padding-right: 5px;
 }
 
-#inputPromptShapeLocation{
-    margin-right:5px;
-    color:#0087d5;
-    background-color:#0f111a;
+#inputPromptLocation {
+    background-color: #0087d5;
+    color: #000;
+    padding-right: 5px;
 }
 
-.error{
-    color:red;
+#inputPromptShapeLocation {
+    margin-right: 5px;
+    color: #0087d5;
+    background-color: #0f111a;
 }
 
-.indent{
-    margin-right:1em;
+.error {
+    color: red;
 }
 
-.highlight1{
-    color:#c58b6f;
+.indent {
+    margin-right: 1em;
 }
 
-.highlight2{
-    color:#8ed0f8;
+.highlight1 {
+    color: #c58b6f;
 }
 
-#defaultCanvas0{
+.highlight2 {
+    color: #8ed0f8;
+}
+
+#defaultCanvas0 {
     position: absolute !important;
     top: 0;
     left: 0;
