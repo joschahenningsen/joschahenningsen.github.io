@@ -3,7 +3,7 @@ let rainSketch = function (p) {
     p.font;
 
     p.preload = function () {
-        p.font = p.loadFont('https://joschahenningsen.github.io/static/font/RobotoMonoforPowerline.ttf');
+        p.font = p.loadFont('/static/font/RobotoMonoforPowerline.ttf');
     }
 
     p.setup = function () {
